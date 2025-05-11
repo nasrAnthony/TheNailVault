@@ -1,24 +1,31 @@
-# The Nail Vault Auto‑Poster
+# The Nail Vault Scheduler
 
-*The Nail Vault* is a personal automation tool that feeds fresh, high‑quality nail‑design inspiration to the **[The Nail Vault Pinterest account](https://www.pinterest.com/)**.  
-It does three things, end‑to‑end:
+*The Nail Vault Scheduler* is a personal Pinterest helper that **curates**, **lets the owner review**, and then **schedules** high‑quality nail‑design Pins for the [The Nail Vault Pinterest account](https://www.pinterest.com/).
 
-1. **Scrape** – Collects trending artificial‑nail sets from AliExpress.  
-2. **Filter** – Uses computer‑vision + captioning to keep only images that clearly show hands and elegant nail art.  
-3. **Publish** – Uploads the best images to a Pinterest board, adding an affiliate link to the product so followers can buy the exact set.
+---
 
-No user data—other than my own Pinterest access token and board ID—is stored or shared.
+## What it does — step by step
+
+| Stage | Action |
+|-------|--------|
+| **1. Collect** | Collect trending artificial‑nail sets from various sources. |
+| **2. Filter** | Uses computer‑vision & BLIP captioning to keep only images that clearly show hands and elegant nail art. |
+| **3. **Manual Review** | **Every retained image is presented in a local GUI/CLI prompt (“Publish this Pin? [y/n]”).**  No Pin is created without explicit approval by the account owner. |
+| **4. Schedule** | Approved images are queued (≈ 1 pin / 2 h, well under Pinterest’s daily limits) using the official Pinterest v5 API (`pins:write`, `boards:read`). |
 
 ---
 
 ## Why?
 
-Finding cute press‑on nail ideas means scrolling through pages of mixed‑quality results.  
-This tool curates them automatically:
+Scrolling AliExpress for cute press‑on nails yields hundreds of low‑quality shots.  
+This tool surfaces the best images **and still lets the owner choose each Pin**, preventing spam and ensuring every post fits the brand aesthetic.
 
-* consistent aesthetic (hands, not packaging)
-* affiliate links only when a design passes the quality filter
-* steady posting cadence (≈ 1 pin every 2 hours) to keep the board fresh
+---
+
+## Affiliate disclosure
+
+Some approved Pins include AliExpress affiliate links.  
+When that happens, the scheduler automatically appends **“#affiliate link”** to the Pin description to stay transparent with followers.
 
 ---
 
@@ -28,19 +35,20 @@ This tool curates them automatically:
 |-------|-------------------|
 | Scrape | Selenium |
 | Image filter | OpenCV, MediaPipe, BLIP captioning |
-| Pinterest upload | Official Pinterest v5 API |
-| Scheduler | Python + APScheduler |
+| Manual review UI | Tkinter dialog (or CLI prompt in headless mode) |
+| Pinterest upload | Official Pinterest v5 API |
+| Scheduler | APScheduler (cron‑style jobs) |
 
 ---
 
 ## Privacy
 
 See [`privacy-policy.md`](privacy-policy.md).  
-TL;DR: the script stores a Pinterest OAuth token **locally** and never shares data with third parties.
+TL;DR — The script stores a Pinterest OAuth token **locally** and never shares user data.
 
 ---
 
 ## Contact
 
 Questions or collaborations?  
-**thenailvault@example.com**
+**epic2battle3@gmail.com**
